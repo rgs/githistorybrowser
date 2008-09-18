@@ -43,19 +43,23 @@ endfunc
 " called from a gitblame window
 function GitHBBackInTime()
     normal ^"sye
+    let l = line(".") - 1
     set noro
     %d
     exec "r!git blame" b:basefilename @s."^" "2>/dev/null || git blame" b:basefilename @s
     1d
+    exec "normal" l . "j"
     set ro nomod
 endfunc
 
 " called from a gitblame window
 function GitHBGoToHEAD()
+    let l = line(".") - 1
     set noro
     %d
     exec "r!git blame" b:basefilename "HEAD"
     1d
+    exec "normal" l . "j"
     set ro nomod
 endfunc
 
