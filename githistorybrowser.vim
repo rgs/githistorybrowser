@@ -40,11 +40,7 @@ endfunc
 function GitHBAnnotate() range
     new
     let b:basefilename=expand("#")
-    if a:firstline
-        exec "r!git blame -L" a:firstline . "," . a:lastline b:basefilename
-    else
-        r!git blame #
-    endif
+    exec "r!git blame -L" a:firstline . "," . a:lastline b:basefilename
     1d
     call GitHBSetupAnnotateBuffer()
 endfunc
