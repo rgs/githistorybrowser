@@ -1,7 +1,11 @@
 " git history browser
 "
+" In normal mode :
 " _b will open a blame window
 " _l will open a log window
+" In visual mode :
+" _b will open a blame window, restricted to the lines
+"    currently selected
 "
 " In the blame window:
 " _g or a double click will display blame for the file at the time of the
@@ -18,7 +22,8 @@
 " In a log window:
 " _d or a double click will jump to the diff where the cursor currently is
 
-nmap <LocalLeader>b :call GitHBAnnotate()<CR>
+nmap <LocalLeader>b :%call GitHBAnnotate()<CR>
+vmap <LocalLeader>b :call GitHBAnnotate()<CR>
 nmap <LocalLeader>l :call GitHBShowLog()<CR>
 
 " sets up mappings and settings for a gitblame window
@@ -32,10 +37,14 @@ function GitHBSetupAnnotateBuffer()
 endfunc
 
 " called from an edition window
-function GitHBAnnotate()
+function GitHBAnnotate() range
     new
-    r!git blame #
     let b:basefilename=expand("#")
+    if a:firstline
+        exec "r!git blame -L" a:firstline . "," . a:lastline b:basefilename
+    else
+        r!git blame #
+    endif
     1d
     call GitHBSetupAnnotateBuffer()
 endfunc
