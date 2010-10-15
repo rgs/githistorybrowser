@@ -51,7 +51,7 @@ endfunc
 
 " called from a gitblame window
 function GitHBBackInTime()
-    normal ^"sye
+    normal ^eb"sye
     let l = line(".") - 1
     set noro
     %d
@@ -75,7 +75,7 @@ endfunc
 " called from a gitblame or a gitlog window
 function GitHBShowDiff()
     if &ft == "gitblame"
-	normal ^"sye
+	normal ^eb"sye
     else
 	normal $
 	?^commit?
