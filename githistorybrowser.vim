@@ -1,26 +1,5 @@
 " git history browser
-"
-" In normal mode :
-" _b will open a blame window
-" _l will open a log window
-" In visual mode :
-" _b will open a blame window, restricted to the lines
-"    currently selected
-"
-" In the blame window:
-" _g or a double click will display blame for the file at the time of the
-" penultimate (or first) change for the current line
-" _h will go back to displaying blame up until HEAD
-" _d will open a new window with the change responsible for the current line
-" _l will open a log window (with the full log for the file)
-"
-" In a diff window:
-" _g or a double click will go to the blame of the file whose path is under
-" the cursor, at the time of the diff. (this will work better if your repo's
-" root dir is in the 'path' option)
-"
-" In a log window:
-" _d or a double click will jump to the diff where the cursor currently is
+" http://github.com/rgs/githistorybrowser
 
 nmap <LocalLeader>b :%call GitHBAnnotate()<CR>
 vmap <LocalLeader>b :call GitHBAnnotate()<CR>
