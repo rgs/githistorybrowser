@@ -5,6 +5,8 @@ nmap <LocalLeader>b :%call GitHBAnnotate()<CR>
 vmap <LocalLeader>b :call GitHBAnnotate()<CR>
 nmap <LocalLeader>l :call GitHBShowLog()<CR>
 
+let s:blameopt="-w"
+
 " sets up mappings and settings for a gitblame window
 function GitHBSetupAnnotateBuffer()
     nmap <buffer> <LocalLeader>g :call GitHBBackInTime()<CR>
@@ -19,7 +21,7 @@ endfunc
 function GitHBAnnotate() range
     new
     let b:basefilename=expand("#")
-    exec "r!git blame -L" a:firstline . "," . a:lastline b:basefilename
+    exec "r!git blame" s:blameopt "-L" a:firstline . "," . a:lastline b:basefilename
     1d
     call GitHBSetupAnnotateBuffer()
 endfunc
@@ -30,7 +32,7 @@ function GitHBBackInTime()
     let l = line(".") - 1
     set noro
     %d
-    exec "r!git blame" b:basefilename @s."^" "2>/dev/null || git blame" b:basefilename @s
+    exec "r!git blame" s:blameopt b:basefilename @s."^" "2>/dev/null || git blame" s:blameopt b:basefilename @s
     1d
     exec "normal" l . "j"
     set ro nomod
@@ -41,7 +43,7 @@ function GitHBGoToHEAD()
     let l = line(".") - 1
     set noro
     %d
-    exec "r!git blame" b:basefilename "HEAD"
+    exec "r!git blame" s:blameopt b:basefilename "HEAD"
     1d
     exec "normal" l . "j"
     set ro nomod
@@ -94,7 +96,7 @@ function GitHBGoToFile()
     if b:basefilename != ''
 	set noro
 	%d
-	exec "r!git blame" b:basefilename b:commitsha1
+	exec "r!git blame" s:blameopt b:basefilename b:commitsha1
 	1d
 	call GitHBSetupAnnotateBuffer()
     else
