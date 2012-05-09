@@ -4,6 +4,9 @@
 nmap <LocalLeader>b :%call GitHBAnnotate()<CR>
 vmap <LocalLeader>b :call GitHBAnnotate()<CR>
 nmap <LocalLeader>l :call GitHBShowLog()<CR>
+nmap <LocalLeader>r :call GitHBSignRecent()<CR>
+
+sign define githot text=++ texthl=Search
 
 let s:blameopt="-w"
 
@@ -24,6 +27,13 @@ function GitHBAnnotate() range
     exec "r!git blame" s:blameopt "-L" a:firstline . "," . a:lastline b:basefilename
     1d
     call GitHBSetupAnnotateBuffer()
+endfunc
+
+function GitHBSignRecent()
+    %call GitHBAnnotate()
+    let b:signid=0
+    exec "g/^" . system("git log -1 --pretty=format:%h " . b:basefilename) . "/let b:signid+=1|exec 'sign place ' . b:signid . ' line=' . line('.') . ' name=githot file=" . b:basefilename . "'"
+    q
 endfunc
 
 " called from a gitblame window
