@@ -3,7 +3,7 @@
 ### Installation
 
 Put githistorybrowser.vim in your `~/.vim` directory,
-and load it (by hand or in your .vimrc) with
+and load it (by hand or in your `.vimrc`) with
 
     :run githistorybrowser.vim
 
@@ -19,7 +19,7 @@ In normal mode :
 
 - `_b` will open a blame window
 - `_l` will open a log window
-- `_r` will mark recent lines in the current with ++ in the margin
+- `_r` will mark recent lines in the current file with ++ in the margin
   (with the `:sign` command)
 
 In visual mode :
@@ -43,3 +43,10 @@ In a diff window:
 In a log window:
 
 - `_d` or a double click will jump to the diff where the cursor currently is
+
+### TODO
+
+Make the visual line selection sticky, but keep 1,$ ranges
+always until $, and make a new macro to reset to 1,$.
+
+Navigation in the log window should be easier.
