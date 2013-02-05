@@ -8,7 +8,7 @@ nmap <LocalLeader>r :call GitHBSignRecent()<CR>
 
 sign define githot text=++ texthl=Search
 
-let s:blameopt="-w"
+let s:blameopt="-w --root"
 
 " sets up mappings and settings for a gitblame window
 function GitHBSetupAnnotateBuffer()
