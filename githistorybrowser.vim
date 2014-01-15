@@ -64,7 +64,7 @@ function GitHBShowDiff()
     if &ft == "gitblame"
 	normal ^eb"sye
     else
-	normal $
+	normal $j
 	?^commit?
 	normal W"syaw
 	noh
